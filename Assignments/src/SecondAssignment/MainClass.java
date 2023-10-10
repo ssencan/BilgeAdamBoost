@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -17,8 +18,9 @@ public class MainClass {
 		String word = scn.nextLine();
 		// zip(word);
 		// zip1(word);
-		// zip2(word);
-		letterCount(word);
+		//zip2(word);
+		//letterCount(word);
+
 
 	}
 
@@ -65,22 +67,23 @@ public class MainClass {
 	// 1.soru
 	public static void letterCount(String input) {
 		LinkedHashMap<Character, Integer> list = new LinkedHashMap<Character, Integer>();
-		for (int i = 0; i < input.length(); i++) {
-			int count = 0;
-			char currentLetter = input.charAt(i);
-			for (int j = 0; j < input.length(); j++) {
-				if (currentLetter == input.charAt(j)) {
-					count++;
-				}
-			}
-			// Hashmapte keyi character yaparak burda fazladan bir if şartı yazmaktan
-			// kurtulduk.Tekrar eden harfi yazmıyor.
-			list.put(currentLetter, count);
-		}
-		for (Entry<Character, Integer> entry : list.entrySet()) {
-			System.out.print(entry.getKey() + "" + entry.getValue() + "");
 
-		}
+	    for (int i = 0; i < input.length(); i++) {
+	        char currentLetter = input.charAt(i);
+	        
+	        // Harita içinde bu karakteri kontrol edelim
+	        if (list.containsKey(currentLetter)) {
+	            // Eğer haritada bu karakter zaten varsa, değeri bir artıralım
+	            list.put(currentLetter, list.get(currentLetter) + 1);
+	        } else {
+	            // Eğer haritada bu karakter yoksa, yeni bir girdi oluşturalım
+	            list.put(currentLetter, 1);
+	        }
+	    }
+
+	    for (Entry<Character, Integer> entry : list.entrySet()) {
+	        System.out.print(entry.getKey() + "" + entry.getValue() + "");
+	    }
 	}
 
 	// 1.soru alternatif

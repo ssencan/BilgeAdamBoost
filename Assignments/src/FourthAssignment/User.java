@@ -1,4 +1,4 @@
-package ThirdAssignment;
+package FourthAssignment;
 
 public abstract class User {
 	
@@ -8,7 +8,7 @@ public abstract class User {
 	public User(String userName,int password) {
 		this.userName = userName;
 		this.password = password;// ilk şifre ataması sistem tarafından
-		System.out.println("User constr girildi");
+		//System.out.println("User constr girildi");
 	}
 
     public abstract void viewPersonalInfo();

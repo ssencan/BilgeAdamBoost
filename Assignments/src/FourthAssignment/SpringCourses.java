@@ -8,12 +8,18 @@ public class SpringCourses implements Courses {
 	@Override
 	public void addCourses(String lesson) {
 		springCoursesList.add(lesson);
-		
+
 	}
 
 	@Override
 	public LinkedList<String> getCoursesList() {
 		return springCoursesList;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

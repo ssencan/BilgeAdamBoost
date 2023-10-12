@@ -4,8 +4,7 @@ import java.util.LinkedList;
 
 public class ManagementStaff extends Staff {
 
-	private Courses springCourse;
-	private Courses fallCourse;
+
 
 	public ManagementStaff(String userName, int password) {
 		super(userName, password);
@@ -23,36 +22,36 @@ public class ManagementStaff extends Staff {
 	// Yönetim Ders dönemini ve ders ismini Dependency Injection ile Courses
 	// interfacini kullanan Spring ve Fall Courses içindeki listeye ekler.
 	public void assignCourse(Courses course, String lesson) {
-		if (course instanceof SpringCourses) {
-			this.springCourse = course;
-			this.springCourse.addCourses(lesson);
-		} else if (course instanceof FallCourses) {
-			this.fallCourse = course;
-			this.fallCourse.addCourses(lesson);
+		if (course.getClass()== SpringCourses.class) {
+			
+			course.addCourses(lesson);
+		} else if (course.getClass()== FallCourses.class) {
+			course.addCourses(lesson);
 		}
 
 	}
-
-	public void showCourses() {
-	    if (springCourse != null) {
-	        LinkedList<String> springCourseList = springCourse.getCoursesList();
+//Burda course parametresi ile önceden initiate edilmiş dönemi parametre alarak o döneme ait ders listesi gösterilmesi sağlanıyor.
+	public void showCourses(Courses course) {
+	    if (course.getClass()== SpringCourses.class) {
+	        LinkedList<String> springCourseList = course.getCoursesList();
 	        System.out.println("Spring Courses:");
-	        for (String course : springCourseList) {
-	            System.out.println(course);
+	        for (String courses : springCourseList) {
+	            System.out.println(courses);
 	        }
 	    } else {
 	        System.out.println("No Spring courses available.");
 	    }
 
-	    if (fallCourse != null) {
-	        LinkedList<String> fallCourseList = fallCourse.getCoursesList();
+	    if (course.getClass()== FallCourses.class) {
+	        LinkedList<String> fallCourseList = course.getCoursesList();
 	        System.out.println("Fall Courses:");
-	        for (String course : fallCourseList) {
-	            System.out.println(course);
+	        for (String courses : fallCourseList) {
+	            System.out.println(courses);
 	        }
 	    } else {
 	        System.out.println("No Fall courses available.");
 	    }
+		
 	}
 
 //	public void dropCourse(String lesson) {

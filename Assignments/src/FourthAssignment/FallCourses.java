@@ -8,14 +8,19 @@ public class FallCourses implements Courses {
 	@Override
 	public void addCourses(String lesson) {
 		fallCoursesList.add(lesson);
-		
-		
+
 	}
 
 	@Override
 	public LinkedList<String> getCoursesList() {
 
 		return fallCoursesList;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

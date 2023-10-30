@@ -3,6 +3,7 @@ package com.bilgeadam.postgresqljdbc;
 import java.sql.SQLException;
 
 import com.bilgeadam.postgresqljdbc.model.DersOgrenci;
+import com.bilgeadam.postgresqljdbc.model.Ogretmen;
 import com.bilgeadam.postgresqljdbc.repository.DersOgrenciRepository;
 import com.bilgeadam.postgresqljdbc.repository.DersRepository;
 import com.bilgeadam.postgresqljdbc.repository.KonuRepository;
@@ -44,7 +45,8 @@ public class App {
 //			System.out.println(dersogrenci_repo.getAll());
 //			System.out.println(dersogrenci_repo.save(new DersOgrenci(13,7,1,100)));
 //			System.out.println(dersogrenci_repo.deleteByID(15));
-			System.out.println(dersogrenci_repo.getByID(16));
+//			System.out.println(dersogrenci_repo.getByID(16));
+			System.out.println(ogretmen_repo.update(6,new Ogretmen("updated",false)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

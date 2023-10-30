@@ -3,7 +3,15 @@ package FourthAssignment;
 import java.util.LinkedList;
 
 public class FallCourses implements Courses {
+	private String fallSemester;
 	private LinkedList<String> fallCoursesList = new LinkedList<String>();
+	private static LinkedList<String> semesterList = new LinkedList<String>();
+	//Her management staff örneği oluştuğunda ayrı semester listesi tutmasın, ortak müfreadat üzerinde çalışsınlar istiyorum. BU yüzden bu listeler static.
+
+	public FallCourses(String fallSemester) {
+		semesterList.add(fallSemester);
+		this.fallSemester = fallSemester;
+	}
 
 	@Override
 	public void addCourses(String lesson) {
@@ -18,9 +26,12 @@ public class FallCourses implements Courses {
 	}
 
 	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+	public void getSemesterList() {
+		System.out.print("Güz dönemine ait dersler =>");
+		for (String semester : semesterList) {
+			System.out.print("<"+semester + "> ");
+		}
+		System.out.println("");
 	}
 
 }

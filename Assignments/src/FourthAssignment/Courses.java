@@ -6,7 +6,6 @@ public interface Courses {
 
 	public void addCourses(String str);
 
-	public LinkedList<String> getCoursesList();
+	public void getCoursesSemesterList();
 
-	boolean isEmpty();
 }

@@ -19,7 +19,7 @@ public class MainClass {
 		// zip(word);
 		// zip1(word);
 		//zip2(word);
-		//letterCount(word);
+		letterCount(word);
 
 
 	}

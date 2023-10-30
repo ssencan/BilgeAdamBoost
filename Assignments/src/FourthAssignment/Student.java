@@ -3,12 +3,12 @@ package FourthAssignment;
 import java.util.LinkedList;
 
 public class Student extends User {
-	private Courses courses;
+
 	private LinkedList<String> studentCoursesList = new LinkedList<String>();
 
-	public Student(String userName, int password, Courses courses) {
+	public Student(String userName, int password) {
 		super(userName, password);
-		this.courses = courses;
+
 	}
 
 	@Override

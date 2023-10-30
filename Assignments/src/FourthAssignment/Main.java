@@ -29,16 +29,13 @@ public class Main {
 
 		ManagementStaff ms = new ManagementStaff("TC12", 5587);
 		ManagementStaff ms1 = new ManagementStaff("TC12", 5587);
-		SpringCourses bahar1 = new SpringCourses();
+		SpringCourses bahar1 = new SpringCourses("1. Bahar Dönemi");
 		// sıkıntı burda yeni bir obje oluşturduğun için son eklenene göre oluyor
-		SpringCourses bahar2 = new SpringCourses();
-		FallCourses güz1 = new FallCourses();
-		FallCourses güz2 = new FallCourses();
-
-		ArrayList<Courses> coursesList = new ArrayList<>();
+		SpringCourses bahar2 = new SpringCourses("2. Bahar Dönemi");
+		FallCourses güz1 = new FallCourses("1. Güz Dönemi ");
+		FallCourses güz2 = new FallCourses("2. Güz Dönemi");
 
 		ms.assignCourse(bahar1, "Görüntü İşleme");
-
 		ms.assignCourse(bahar1, "Yapay Zeka");
 		ms1.assignCourse(bahar1, "Bilgisayar Mimarisi");
 		ms.assignCourse(bahar2, "Siber Güvenlik");
@@ -46,17 +43,31 @@ public class Main {
 		ms1.assignCourse(güz1, "Kablosuz Haberleşme Ağları");
 		ms.assignCourse(güz1, "Mobil");
 		// ms.assignCourse(güz2, "Mobil1221");
-		
-		//Oluşturulan dönemler dizide tutuldu. Çünkü başka yıllara ait dönemler olabilir.
-		coursesList.add(bahar1);
-		coursesList.add(bahar2);
-		coursesList.add(güz1);
-		coursesList.add(güz2);
 
 		ms.showCourses(güz1);
 
-		Student st1 = new Student("tc2323", 858745, new FallCourses());
-		// st1.enrollCourse();
+		Student st1 = new Student("tc2323", 858745);
+
+		/*
+		 * buna benzer yapmaya çalış import java.util.ArrayList; import java.util.List;
+		 * 
+		 * // Örnek bir sınıf class ListManager { private List<String> nameList;
+		 * 
+		 * // Constructor public ListManager() { this.nameList = new ArrayList<>(); }
+		 * 
+		 * // Listeye ekleme metodunu tanımlayalım public void addToNameList(String
+		 * name) { this.nameList.add(name); } }
+		 * 
+		 * // Ana sınıf public class Main { public static void main(String[] args) { //
+		 * İlgili sınıfın örneğini oluşturun ListManager listManager = new
+		 * ListManager();
+		 * 
+		 * // Yeni bir obje oluşturun Object obj = new Object();
+		 * 
+		 * // Oluşturulan objenin adını (referansını) ilgili sınıfa gönderin
+		 * listManager.addToNameList(obj.toString()); } }
+		 * 
+		 */
 
 	}
 

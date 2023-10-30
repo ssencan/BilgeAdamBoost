@@ -7,9 +7,9 @@ public abstract class Staff extends User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	public abstract void viewPersonalInfo(); //Abstract metodu abstract override edip subclassların farklı infolarını override etmeye zorladım.
-	//buna gerek yok altta zaten gözüküyor.
+//	@Override
+//	public abstract void viewPersonalInfo(); //Abstract metodu abstract override edip subclassların farklı infolarını override etmeye zorladım.
+//	//buna gerek yok altta zaten gözüküyor.
 
 	public void permissionRequest() {
 		System.out.println("İzin talep edildi");

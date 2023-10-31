@@ -6,15 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import com.bilgeadam.postgresqljdbc.Constants;
 import com.bilgeadam.postgresqljdbc.model.Ogrenci;
 
-public class OgrenciRepository {
+public class OgrenciRepository extends Repository<Ogrenci> {
 
 	public boolean save(Ogrenci ogrn) throws SQLException {
 		boolean result = false;
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		String sql = "INSERT INTO \"public\".\"OGRENCI\"(\"NAME\", \"OGR_NUMBER\",\"YEAR\") VALUES (?, ?, ?)";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setString(1, ogrn.getNAME());
@@ -25,10 +23,9 @@ public class OgrenciRepository {
 		con.close();
 		return result;
 	}
-	
-	public boolean deleteByID(long id) throws SQLException
-	{
-		Connection con = Constants.getConnection();
+
+	public boolean deleteByID(long id) throws SQLException {
+		Connection con = getConnection();
 		String sql = "delete from \"public\".\"OGRENCI\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
@@ -40,7 +37,7 @@ public class OgrenciRepository {
 
 	public ArrayList<Ogrenci> getAll() throws SQLException {
 		ArrayList<Ogrenci> list = new ArrayList<>();
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		Statement stmnt = con.createStatement();
 		ResultSet result = stmnt.executeQuery("select * from \"public\".\"OGRENCI\" order by \"ID\" asc");
 		while (result.next()) {
@@ -55,18 +52,17 @@ public class OgrenciRepository {
 		con.close();
 		return list;
 	}
-	
-	public Ogrenci getByID(long id) throws SQLException
-	{
+
+	public Ogrenci getByID(long id) throws SQLException {
 		Ogrenci ogrn = null;
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		String sql = "select * from \"public\".\"OGRENCI\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
 		ResultSet result = stmnt.executeQuery();
-		while (result.next())
-		{
-			ogrn = new Ogrenci(result.getLong("ID"), result.getString("NAME"), result.getLong("OGR_NUMBER"), result.getLong("YEAR"));
+		while (result.next()) {
+			ogrn = new Ogrenci(result.getLong("ID"), result.getString("NAME"), result.getLong("OGR_NUMBER"),
+					result.getLong("YEAR"));
 		}
 		result.close();
 		stmnt.close();

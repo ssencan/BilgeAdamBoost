@@ -1,0 +1,11 @@
+com\bilgeadam\postgresqljdbc\repository\DersRepository.class
+com\bilgeadam\postgresqljdbc\repository\OgrenciRepository.class
+com\bilgeadam\postgresqljdbc\model\DersDTO.class
+com\bilgeadam\postgresqljdbc\model\Ogrenci.class
+com\bilgeadam\postgresqljdbc\repository\KonuRepository.class
+com\bilgeadam\postgresqljdbc\model\Konu.class
+com\bilgeadam\postgresqljdbc\model\Ogretmen.class
+com\bilgeadam\postgresqljdbc\model\Ders.class
+com\bilgeadam\postgresqljdbc\Constants.class
+com\bilgeadam\postgresqljdbc\model\DersOgrenci.class
+com\bilgeadam\postgresqljdbc\repository\DersOgrenciRepository.class

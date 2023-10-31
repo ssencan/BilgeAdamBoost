@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.bilgeadam.postgresqljdbc.Constants;
+// Bu sefer her repoda constant import etmeye gerek kalmıyor. Çünkü base repoda yaptık bu olayı
 import com.bilgeadam.postgresqljdbc.model.Ogretmen;
 
-public class OgretmenRepository {
+public class OgretmenRepository extends Repository<Ogretmen> {
 	public boolean save(Ogretmen ogr) throws SQLException {
 		boolean result = false;
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		String sql = "INSERT INTO \"public\".\"OGRETMEN\"(\"NAME\", \"IS_GICIK\") VALUES (?, ?)";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setString(1, ogr.getNAME());
@@ -25,7 +25,7 @@ public class OgretmenRepository {
 	}
 
 	public boolean deleteByID(long id) throws SQLException {
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		String sql = "delete from \"public\".\"OGRETMEN\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
@@ -37,7 +37,7 @@ public class OgretmenRepository {
 
 	public Ogretmen getByID(long id) throws SQLException {
 		Ogretmen ogr = null;
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		String sql = "select * from \"public\".\"OGRETMEN\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
@@ -53,7 +53,7 @@ public class OgretmenRepository {
 
 	public ArrayList<Ogretmen> getAll() throws SQLException {
 		ArrayList<Ogretmen> list = new ArrayList<>();
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		Statement stmnt = con.createStatement();
 		ResultSet result = stmnt.executeQuery("select * from \"public\".\"OGRETMEN\" order by \"ID\" asc");
 		while (result.next()) {
@@ -68,17 +68,17 @@ public class OgretmenRepository {
 		return list;
 	}
 
-	public boolean update(long id, Ogretmen ogr) throws SQLException {
-		boolean result = false;
-		Connection con = Constants.getConnection();
-		String sql = "UPDATE \"public\".\"OGRETMEN\" SET \"NAME\" = ?, \"IS_GICIK\" = ? WHERE \"ID\" = ?";
-		PreparedStatement stmnt = con.prepareStatement(sql);
-		stmnt.setString(1, ogr.getNAME());
-		stmnt.setBoolean(2, ogr.isIS_GICIK());
-		stmnt.setLong(3, id);
-		result = stmnt.executeUpdate() == 1;
-		stmnt.close();
-		con.close();
-		return result;
-	}
+//	public boolean update(long id, Ogretmen ogr) throws SQLException {
+//		boolean result = false;
+//		Connection con = Constants.getConnection();
+//		String sql = "UPDATE \"public\".\"OGRETMEN\" SET \"NAME\" = ?, \"IS_GICIK\" = ? WHERE \"ID\" = ?";
+//		PreparedStatement stmnt = con.prepareStatement(sql);
+//		stmnt.setString(1, ogr.getNAME());
+//		stmnt.setBoolean(2, ogr.isIS_GICIK());
+//		stmnt.setLong(3, id);
+//		result = stmnt.executeUpdate() == 1;
+//		stmnt.close();
+//		con.close();
+//		return result;
+//	}
 }

@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import com.bilgeadam.postgresqljdbc.Constants;
 import com.bilgeadam.postgresqljdbc.model.Konu;
 
-public class KonuRepository {
+public class KonuRepository extends Repository<Konu>{
 	public boolean save(Konu konu) throws SQLException {
 		boolean result = false;
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		String sql = "INSERT INTO \"public\".\"KONU\"(\"NAME\") VALUES (?)";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setString(1, konu.getNAME());
@@ -24,7 +24,7 @@ public class KonuRepository {
 	}
 
 	public boolean deleteByID(long id) throws SQLException {
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		String sql = "delete from \"public\".\"KONU\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
@@ -36,7 +36,7 @@ public class KonuRepository {
 
 	public Konu getByID(long id) throws SQLException {
 		Konu konu = null;
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		String sql = "select * from \"public\".\"KONU\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
@@ -52,7 +52,7 @@ public class KonuRepository {
 
 	public ArrayList<Konu> getAll() throws SQLException {
 		ArrayList<Konu> list = new ArrayList<>();
-		Connection con = Constants.getConnection();
+		Connection con = getConnection();
 		Statement stmnt = con.createStatement();
 		ResultSet result = stmnt.executeQuery("select * from \"public\".\"KONU\" order by \"ID\" asc");
 		while (result.next()) {

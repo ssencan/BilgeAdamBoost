@@ -42,11 +42,11 @@ public class App {
 //			System.out.println(ogrenci_repo.save(new Ogrenci("şükrü",911,13)));
 //			System.out.println(ogrenci_repo.deleteByID(6));
 //			System.out.println(ogrenci_repo.getByID(7));
-//			System.out.println(dersogrenci_repo.getAll());
+			System.out.println(dersogrenci_repo.getAll());
 //			System.out.println(dersogrenci_repo.save(new DersOgrenci(13,7,1,100)));
 //			System.out.println(dersogrenci_repo.deleteByID(15));
 //			System.out.println(dersogrenci_repo.getByID(16));
-			System.out.println(ogretmen_repo.update(6,new Ogretmen("updated",false)));
+//			System.out.println(ogretmen_repo.update(122, new Ogretmen("updatedName", false)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

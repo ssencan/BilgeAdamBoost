@@ -1,4 +1,4 @@
-package com.bilgeadam.postgresqljdbc.repository;
+package com.bilgeadam.jakartarest.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,13 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import com.bilgeadam.postgresqljdbc.model.Ogrenci;
 
-public class OgrenciRepository extends Repository<Ogrenci> {
+import com.bilgeadam.jakartarest.Constants;
+import com.bilgeadam.jakartarest.model.Ogrenci;
 
-	public boolean save(Ogrenci ogrn) throws SQLException {
+public class OgrenciRepository
+{
+
+	public boolean save(Ogrenci ogrn) throws SQLException
+	{
 		boolean result = false;
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		String sql = "INSERT INTO \"public\".\"OGRENCI\"(\"NAME\", \"OGR_NUMBER\",\"YEAR\") VALUES (?, ?, ?)";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setString(1, ogrn.getNAME());
@@ -24,8 +28,9 @@ public class OgrenciRepository extends Repository<Ogrenci> {
 		return result;
 	}
 
-	public boolean deleteByID(long id) throws SQLException {
-		Connection con = getConnection();
+	public boolean deleteByID(long id) throws SQLException
+	{
+		Connection con = Constants.getConnection();
 		String sql = "delete from \"public\".\"OGRENCI\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
@@ -35,12 +40,14 @@ public class OgrenciRepository extends Repository<Ogrenci> {
 		return result;
 	}
 
-	public ArrayList<Ogrenci> getAll() throws SQLException {
+	public ArrayList<Ogrenci> getAll() throws SQLException
+	{
 		ArrayList<Ogrenci> list = new ArrayList<>();
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		Statement stmnt = con.createStatement();
 		ResultSet result = stmnt.executeQuery("select * from \"public\".\"OGRENCI\" order by \"ID\" asc");
-		while (result.next()) {
+		while (result.next())
+		{
 			long id = result.getLong("ID");
 			String name = result.getString("NAME");
 			long ogr_number = result.getLong("OGR_NUMBER");
@@ -53,16 +60,17 @@ public class OgrenciRepository extends Repository<Ogrenci> {
 		return list;
 	}
 
-	public Ogrenci getByID(long id) throws SQLException {
+	public Ogrenci getByID(long id) throws SQLException
+	{
 		Ogrenci ogrn = null;
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		String sql = "select * from \"public\".\"OGRENCI\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
 		ResultSet result = stmnt.executeQuery();
-		while (result.next()) {
-			ogrn = new Ogrenci(result.getLong("ID"), result.getString("NAME"), result.getLong("OGR_NUMBER"),
-					result.getLong("YEAR"));
+		while (result.next())
+		{
+			ogrn = new Ogrenci(result.getLong("ID"), result.getString("NAME"), result.getLong("OGR_NUMBER"), result.getLong("YEAR"));
 		}
 		result.close();
 		stmnt.close();

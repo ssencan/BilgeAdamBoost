@@ -1,4 +1,4 @@
-package com.bilgeadam.postgresqljdbc.repository;
+package com.bilgeadam.jakartarest.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,13 +7,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.bilgeadam.postgresqljdbc.model.DersOgrenci;
+import com.bilgeadam.jakartarest.Constants;
+import com.bilgeadam.jakartarest.model.DersOgrenci;
 
-public class DersOgrenciRepository extends Repository<DersOgrenci> {
+public class DersOgrenciRepository
+{
 
-	public boolean save(DersOgrenci dogrn) throws SQLException {
+	public boolean save(DersOgrenci dogrn) throws SQLException
+	{
 		boolean result = false;
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		String sql = "INSERT INTO \"public\".\"DERS_OGRENCI\"(\"DERS_ID\", \"OGRENCI_ID\",\"DEVAMSIZLIK\",\"NOTE\") VALUES (?, ?, ?, ?)";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, dogrn.getDERS_ID());
@@ -26,8 +29,9 @@ public class DersOgrenciRepository extends Repository<DersOgrenci> {
 		return result;
 	}
 
-	public boolean deleteByID(long id) throws SQLException {
-		Connection con = getConnection();
+	public boolean deleteByID(long id) throws SQLException
+	{
+		Connection con = Constants.getConnection();
 		String sql = "delete from \"public\".\"DERS_OGRENCI\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
@@ -37,12 +41,14 @@ public class DersOgrenciRepository extends Repository<DersOgrenci> {
 		return result;
 	}
 
-	public ArrayList<DersOgrenci> getAll() throws SQLException {
+	public ArrayList<DersOgrenci> getAll() throws SQLException
+	{
 		ArrayList<DersOgrenci> list = new ArrayList<>();
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		Statement stmnt = con.createStatement();
 		ResultSet result = stmnt.executeQuery("select * from \"public\".\"DERS_OGRENCI\" order by \"ID\" asc");
-		while (result.next()) {
+		while (result.next())
+		{
 			long id = result.getLong("ID");
 			long ders_id = result.getLong("DERS_ID");
 			long ogrn_id = result.getLong("OGRENCI_ID");
@@ -56,16 +62,17 @@ public class DersOgrenciRepository extends Repository<DersOgrenci> {
 		return list;
 	}
 
-	public DersOgrenci getByID(long id) throws SQLException {
+	public DersOgrenci getByID(long id) throws SQLException
+	{
 		DersOgrenci dogrn = null;
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		String sql = "select * from \"public\".\"DERS_OGRENCI\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
 		ResultSet result = stmnt.executeQuery();
-		while (result.next()) {
-			dogrn = new DersOgrenci(result.getLong("ID"), result.getLong("DERS_ID"), result.getLong("OGRENCI_ID"),
-					result.getInt("DEVAMSIZLIK"), result.getInt("NOTE"));
+		while (result.next())
+		{
+			dogrn = new DersOgrenci(result.getLong("ID"), result.getLong("DERS_ID"), result.getLong("OGRENCI_ID"), result.getInt("DEVAMSIZLIK"), result.getInt("NOTE"));
 		}
 		result.close();
 		stmnt.close();

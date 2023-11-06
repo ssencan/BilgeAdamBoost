@@ -4,12 +4,12 @@ import java.sql.SQLException;
 
 import org.postgresql.util.PSQLException;
 
+import com.bilgeadam.jakartarest.repository.DersOgrenciRepository;
+import com.bilgeadam.jakartarest.repository.DersRepository;
+import com.bilgeadam.jakartarest.repository.KonuRepository;
+import com.bilgeadam.jakartarest.repository.OgrenciRepository;
+import com.bilgeadam.jakartarest.repository.OgretmenRepository;
 import com.bilgeadam.postgresqljdbc.model.Ogrenci;
-import com.bilgeadam.postgresqljdbc.repository.DersOgrenciRepository;
-import com.bilgeadam.postgresqljdbc.repository.DersRepository;
-import com.bilgeadam.postgresqljdbc.repository.KonuRepository;
-import com.bilgeadam.postgresqljdbc.repository.OgrenciRepository;
-import com.bilgeadam.postgresqljdbc.repository.OgretmenRepository;
 
 public class App
 {

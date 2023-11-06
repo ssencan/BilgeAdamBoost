@@ -1,4 +1,4 @@
-package com.bilgeadam.postgresqljdbc.repository;
+package com.bilgeadam.jakartarest.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.bilgeadam.postgresqljdbc.Constants;
-import com.bilgeadam.postgresqljdbc.model.Ogretmen;
+import com.bilgeadam.jakartarest.Constants;
+import com.bilgeadam.jakartarest.model.Ogretmen;
 
 public class OgretmenRepository
 {

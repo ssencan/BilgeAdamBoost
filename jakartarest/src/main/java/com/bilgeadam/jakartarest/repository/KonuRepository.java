@@ -1,4 +1,4 @@
-package com.bilgeadam.postgresqljdbc.repository;
+package com.bilgeadam.jakartarest.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,13 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.bilgeadam.postgresqljdbc.Constants;
-import com.bilgeadam.postgresqljdbc.model.Konu;
+import com.bilgeadam.jakartarest.Constants;
+import com.bilgeadam.jakartarest.model.Konu;
 
-public class KonuRepository extends Repository<Konu>{
-	public boolean save(Konu konu) throws SQLException {
+public class KonuRepository
+{
+	public boolean save(Konu konu) throws SQLException
+	{
 		boolean result = false;
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		String sql = "INSERT INTO \"public\".\"KONU\"(\"NAME\") VALUES (?)";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setString(1, konu.getNAME());
@@ -23,8 +25,9 @@ public class KonuRepository extends Repository<Konu>{
 		return result;
 	}
 
-	public boolean deleteByID(long id) throws SQLException {
-		Connection con = getConnection();
+	public boolean deleteByID(long id) throws SQLException
+	{
+		Connection con = Constants.getConnection();
 		String sql = "delete from \"public\".\"KONU\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
@@ -34,14 +37,16 @@ public class KonuRepository extends Repository<Konu>{
 		return result;
 	}
 
-	public Konu getByID(long id) throws SQLException {
+	public Konu getByID(long id) throws SQLException
+	{
 		Konu konu = null;
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		String sql = "select * from \"public\".\"KONU\" where \"ID\" = ?";
 		PreparedStatement stmnt = con.prepareStatement(sql);
 		stmnt.setLong(1, id);
 		ResultSet result = stmnt.executeQuery();
-		while (result.next()) {
+		while (result.next())
+		{
 			konu = new Konu(result.getLong("ID"), result.getString("NAME"));
 		}
 		result.close();
@@ -50,12 +55,14 @@ public class KonuRepository extends Repository<Konu>{
 		return konu;
 	}
 
-	public ArrayList<Konu> getAll() throws SQLException {
+	public ArrayList<Konu> getAll() throws SQLException
+	{
 		ArrayList<Konu> list = new ArrayList<>();
-		Connection con = getConnection();
+		Connection con = Constants.getConnection();
 		Statement stmnt = con.createStatement();
 		ResultSet result = stmnt.executeQuery("select * from \"public\".\"KONU\" order by \"ID\" asc");
-		while (result.next()) {
+		while (result.next())
+		{
 			long id = result.getLong("ID");
 			String name = result.getString("NAME");
 			list.add(new Konu(id, name));

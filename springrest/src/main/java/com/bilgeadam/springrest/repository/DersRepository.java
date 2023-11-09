@@ -11,6 +11,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bilgeadam.springrest.model.Ders;
+import com.bilgeadam.springrest.model.DersDTO;
+import com.bilgeadam.springrest.model.Konu;
+import com.bilgeadam.springrest.model.Ogretmen;
 
 @Repository
 public class DersRepository {
@@ -31,6 +34,37 @@ public class DersRepository {
 	public List<Ders> getAll() {
 		String sql = "select * from \"public\".\"DERS\" order by \"ID\" asc";
 		return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Ders.class));
+	}
+
+	public List<DersDTO> getAllDTO() {
+
+		String sql = "select \"DERS\".\"ID\",\"OGRETMEN_ID\", \"OGRETMEN\".\"NAME\" AS \"OGR_NAME\", \"OGRETMEN\".\"IS_GICIK\", \"DERS\".\"KONU_ID\", \"KONU\".\"NAME\" AS \"KONU_NAME\" from \"DERS\" inner join \"OGRETMEN\" ON \"OGRETMEN\".\"ID\" = \"DERS\".\"OGRETMEN_ID\" inner join \"KONU\" ON \"KONU\".\"ID\" = \"DERS\".\"KONU_ID\";";
+//		 list olan query seçtim. jdbcTemplate.query(sql, (rs, rowNum) -> {
+//	    ...
+//	});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> {
+			DersDTO dersDTO = new DersDTO();
+			Ders ders = new Ders();
+			Ogretmen ogr = new Ogretmen();
+			Konu konu = new Konu();
+
+			ders.setID(rs.getLong("ID"));
+			ders.setOGRETMEN_ID(rs.getLong("OGRETMEN_ID"));
+			ders.setKONU_ID(rs.getLong("KONU_ID"));
+
+			ogr.setID(rs.getLong("OGRETMEN_ID"));
+			ogr.setNAME(rs.getString("OGR_NAME"));
+			ogr.setIS_GICIK(rs.getBoolean("IS_GICIK"));
+
+			konu.setID(rs.getLong("KONU_ID"));
+			konu.setNAME(rs.getString("KONU_NAME"));
+
+			dersDTO.setDers(ders);
+			dersDTO.setOgr(ogr);
+			dersDTO.setKonu(konu);
+
+			return dersDTO;
+		});
 	}
 
 	public Ders getByID(long id) {
@@ -57,16 +91,6 @@ public class DersRepository {
 		paramMap.put("KID", ders.getKONU_ID());
 		return namedParameterJdbcTemplate.update(sql, paramMap) == 1;
 	}
-
-//	public List<DersDTO> getAllDTO() {
-//
-//		String sql = "select \"DERS\".\"ID\",\"OGRETMEN_ID\", \"OGRETMEN\".\"NAME\" AS \"OGR_NAME\", \"OGRETMEN\".\"IS_GICIK\", \"DERS\".\"KONU_ID\", \"KONU\".\"NAME\" AS \"KONU_NAME\" from \"DERS\" inner join \"OGRETMEN\" ON \"OGRETMEN\".\"ID\" = \"DERS\".\"OGRETMEN_ID\" inner join \"KONU\" ON \"KONU\".\"ID\" = \"DERS\".\"KONU_ID\";";
-//
-//		return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(DersDTO.class));
-//	}
-	
-
-
 
 //	public boolean saveDTO(DersDTO dersDto) throws SQLException
 //	{

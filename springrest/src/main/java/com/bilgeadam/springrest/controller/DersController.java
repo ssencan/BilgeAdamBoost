@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bilgeadam.springrest.model.Ders;
+import com.bilgeadam.springrest.model.DersDTO;
 import com.bilgeadam.springrest.repository.DersRepository;
 
 @RequestMapping(path = "ders")
@@ -40,18 +41,18 @@ public class DersController {
 		}
 	}
 	
-//	@GetMapping(path = "/getalldto", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<List<DersDTO>> getalldto() {
-//
-//		// localhost:8080/springrest/ders/getalldto
-//		try {
-//			return ResponseEntity.ok(ders_repo.getAllDTO());
-//
-//		} catch (Exception e) {
-//			return ResponseEntity.internalServerError().build();
-//
-//		}
-//	}
+	@GetMapping(path = "/getalldto", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<DersDTO>> getalldto() {
+
+		// localhost:8080/springrest/ders/getalldto
+		try {
+			return ResponseEntity.ok(ders_repo.getAllDTO());
+
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().build();
+
+		}
+	}
 
 	@GetMapping(path = "/getbyid/{id}")
 	public ResponseEntity<Ders> getbyid(@PathVariable(value = "id") long id) {

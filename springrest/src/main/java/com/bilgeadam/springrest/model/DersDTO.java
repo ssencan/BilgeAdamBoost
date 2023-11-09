@@ -2,6 +2,15 @@ package com.bilgeadam.springrest.model;
 
 public class DersDTO
 {
+	private Ders ders;
+	public Ders getDers() {
+		return ders;
+	}
+
+	public void setDers(Ders ders) {
+		this.ders = ders;
+	}
+
 	private Ogretmen ogr;
 	private Konu konu;
 

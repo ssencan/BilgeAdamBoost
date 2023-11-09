@@ -10,6 +10,13 @@ import java.util.ArrayList;
 import com.bilgeadam.jakartarest.Constants;
 import com.bilgeadam.jakartarest.model.DersOgrenci;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
+
 public class DersOgrenciRepository
 {
 
@@ -41,6 +48,13 @@ public class DersOgrenciRepository
 		return result;
 	}
 
+	@POST
+	@Path(value = "save")
+	@Consumes(value = MediaType.APPLICATION_JSON)
+	public Response print() {
+		return Response.status(Status.CREATED).entity("Başarı ile kaydedildi").build();
+	}
+	
 	public ArrayList<DersOgrenci> getAll() throws SQLException
 	{
 		ArrayList<DersOgrenci> list = new ArrayList<>();

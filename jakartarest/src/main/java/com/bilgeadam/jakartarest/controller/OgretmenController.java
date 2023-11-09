@@ -51,6 +51,14 @@ public class OgretmenController
 			return Response.serverError().entity("Bir hata oluştu -> " + e.getClass()).build();
 		}
 	}
+	
+
+	@POST
+	@Path(value = "save")
+	@Consumes(value = MediaType.APPLICATION_JSON)
+	public Response print() {
+		return Response.status(Status.CREATED).entity("Başarı ile kaydedildi").build();
+	}
 
 	@GET
 	@Path(value = "/getall")
@@ -74,7 +82,7 @@ public class OgretmenController
 	@Produces(value = MediaType.TEXT_PLAIN)
 	public Response deletebyid(@PathParam(value = "id") long id)
 	{
-		// localhost:8080/jakartarest/ogretmen/deletebyid/1
+		// localhost:8080/jakartarest/ogretmen/deletebyid/7
 		try
 		{
 			if (repo.deleteByID(id))

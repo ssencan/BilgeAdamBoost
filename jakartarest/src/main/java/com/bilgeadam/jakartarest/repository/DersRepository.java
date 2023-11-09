@@ -43,24 +43,30 @@ public class DersRepository
 		return result;
 	}
 
-	public ArrayList<Ders> getAll() throws SQLException
-	{
-		ArrayList<Ders> list = new ArrayList<>();
-		Connection con = Constants.getConnection();
-		Statement stmnt = con.createStatement();
-		ResultSet result = stmnt.executeQuery("select * from \"public\".\"DERS\" order by \"ID\" asc");
-		while (result.next())
-		{
-			long id = result.getLong("ID");
-			long ogretmen_id = result.getLong("OGRETMEN_ID");
-			long konu_id = result.getLong("KONU_ID");
-			list.add(new Ders(id, ogretmen_id, konu_id));
-		}
-		result.close();
-		stmnt.close();
-		con.close();
-		return list;
+	public ArrayList<Ders> getAll() throws SQLException {
+	    ArrayList<Ders> list = new ArrayList<>();
+	    Connection con = Constants.getConnection();
+	    try {
+	        Statement stmnt = con.createStatement();
+	        ResultSet result = stmnt.executeQuery("select * from \"public\".\"DERS\" order by \"ID\" asc");
+	        while (result.next()) {
+	            long id = result.getLong("ID");
+	            long ogretmen_id = result.getLong("OGRETMEN_ID");
+	            long konu_id = result.getLong("KONU_ID");
+	            list.add(new Ders(id, ogretmen_id, konu_id));
+	        }
+	        result.close();
+	        stmnt.close();
+	    } catch (SQLException e) {
+	        System.err.println("SQL hatası oluştu ---> " + e.getMessage());
+	    } catch (Exception e) {
+	        System.err.println("Beklenmeyen bir hata oluştu ---> " + e.getMessage());
+	    } finally {
+	        con.close();
+	    }
+	    return list;
 	}
+
 
 	public ArrayList<DersDTO> getAllDTO() throws SQLException
 	{

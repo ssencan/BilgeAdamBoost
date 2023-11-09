@@ -40,6 +40,12 @@ public class DersOgrenciController {
 
 		}
 	}
+	@POST
+	@Path(value = "save")
+	@Consumes(value = MediaType.APPLICATION_JSON)
+	public Response print() {
+		return Response.status(Status.CREATED).entity("Başarı ile kaydedildi").build();
+	}
 
 	@GET
 	@Path(value = "/getbyidqueryparam")

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bilgeadam.springrest.model.Ders;
 import com.bilgeadam.springrest.model.DersDTO;
+import com.bilgeadam.springrest.model.Konu;
+import com.bilgeadam.springrest.model.Ogretmen;
 import com.bilgeadam.springrest.repository.DersRepository;
 
 @RequestMapping(path = "ders")
@@ -40,7 +42,7 @@ public class DersController {
 
 		}
 	}
-	
+
 	@GetMapping(path = "/getalldto", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<DersDTO>> getalldto() {
 
@@ -85,13 +87,31 @@ public class DersController {
 		}
 	}
 
+//	@PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<String> save(@RequestBody Ders ders) {
+//		// localhost:8080/springrest/ders/save
+//		try {
+//			boolean result = ders_repo.save(ders);
+//			if (result) {
+//				return ResponseEntity.ok("Kayıt başarılı");
+//			} else {
+//				return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
+//		}
+//	}
+
 	@PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> save(@RequestBody Ders ders) {
-		// localhost:8080/springrest/ders/save
+		// localhost:8080/ders/save
 		try {
-			boolean result = ders_repo.save(ders);
+			Ogretmen ogr = new Ogretmen("yeni öğretmen", false);
+			Konu konu = new Konu("yeni konu");
+			boolean result = ders_repo.save(ogr, konu);
 			if (result) {
-				return ResponseEntity.ok("Kayıt başarılı");
+				return ResponseEntity.ok("Kayıt başarı ile kaydedildi");
 			} else {
 				return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
 			}

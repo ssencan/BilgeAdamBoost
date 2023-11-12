@@ -8,10 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.bilgeadam.springrest.Constants;
 
+@EnableTransactionManagement
 @Configuration
 //@Component // 'de olailir ama configuration tercih edilir
 public class BeanFactory
@@ -40,4 +44,9 @@ public class BeanFactory
 	{
 		return new NamedParameterJdbcTemplate(ds);
 	}
+    @Bean
+    @DependsOn(value = "myds")
+    public PlatformTransactionManager transactionManager(@Qualifier(value = "myds") DataSource ds) {
+        return new DataSourceTransactionManager(ds);
+    }
 }

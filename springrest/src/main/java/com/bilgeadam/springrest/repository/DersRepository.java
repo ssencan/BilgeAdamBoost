@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bilgeadam.springrest.model.Ders;
 import com.bilgeadam.springrest.model.DersDTO;
@@ -41,7 +42,7 @@ public class DersRepository {
 		String sql = "select \"DERS\".\"ID\",\"OGRETMEN_ID\", \"OGRETMEN\".\"NAME\" AS \"OGR_NAME\", \"OGRETMEN\".\"IS_GICIK\", \"DERS\".\"KONU_ID\", \"KONU\".\"NAME\" AS \"KONU_NAME\" from \"DERS\" inner join \"OGRETMEN\" ON \"OGRETMEN\".\"ID\" = \"DERS\".\"OGRETMEN_ID\" inner join \"KONU\" ON \"KONU\".\"ID\" = \"DERS\".\"KONU_ID\";";
 //		 list olan query seçtim. jdbcTemplate.query(sql, (rs, rowNum) -> {
 //	    ...
-//	});
+//	}); resultset extractor
 		return jdbcTemplate.query(sql, (rs, rowNum) -> {
 			DersDTO dersDTO = new DersDTO();
 			Ders ders = new Ders();
@@ -91,6 +92,28 @@ public class DersRepository {
 		paramMap.put("KID", ders.getKONU_ID());
 		return namedParameterJdbcTemplate.update(sql, paramMap) == 1;
 	}
+	
+	@Transactional
+	// içeride try catch olmayacak, bu sayede rollback yapıyor
+	public boolean save(Ogretmen ogretmen, Konu konu)
+	{
+		String sql = "insert into \"public\".\"OGRETMEN\" (\"NAME\", \"IS_GICIK\") values (:NAME, :GICIK)";
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("NAME", ogretmen.getNAME());
+		paramMap.put("GICIK", ogretmen.isIS_GICIK());
+		namedParameterJdbcTemplate.update(sql, paramMap);
+		sql = "insert into \"public\".\"KONU\" (\"NAME\") values (:NAME)";
+		paramMap = new HashMap<>();
+		paramMap.put("NAME", konu.getNAME());
+		namedParameterJdbcTemplate.update(sql, paramMap);
+		sql = "insert into \"public\".\"DERS\" (\"OGRETMEN_ID\", \"KONU_ID\") values (:OGRETMENID, :KONUID)";
+		paramMap = new HashMap<>();
+		//idleri burada set ettiğimiz için postmande girdiğimizin önemi yok
+		paramMap.put("OGRETMENID", 174);
+		paramMap.put("KONUID", 211);
+		return namedParameterJdbcTemplate.update(sql, paramMap) == 1;
+	}
+
 
 //	public boolean saveDTO(DersDTO dersDto) throws SQLException
 //	{

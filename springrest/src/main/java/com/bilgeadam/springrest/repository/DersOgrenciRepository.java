@@ -51,7 +51,7 @@ public class DersOgrenciRepository {
 
 	   public boolean save(DersOgrenci dersOgrenci)
 	    {
-	        String sql = "INSERT INTO \"public\".\"DERS_OGRENCI\"(\"DERS_ID\", \"OGR_ID\", \"DEVAMSIZLIK\", \"NOTE\") VALUES (:DERSID, :OGRID, :DEVAMSIZLIK , :NOTE)";
+	        String sql = "INSERT INTO \"public\".\"DERS_OGRENCI\"(\"DERS_ID\", \"OGRENCI_ID\", \"DEVAMSIZLIK\", \"NOTE\") VALUES (:DERSID, :OGRID, :DEVAMSIZLIK , :NOTE)";
 	        Map<String,Object> paramMap = new HashMap<>();
 	        paramMap.put("DERSID", dersOgrenci.getDERS_ID());
 	        paramMap.put("OGRID", dersOgrenci.getOGR_ID());

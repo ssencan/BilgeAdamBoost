@@ -4,7 +4,7 @@ public class DersOgrenci
 {
 	private long ID;
 	private long DERS_ID;
-	private long OGR_ID;
+	private long OGRENCI_ID;
 	private int DEVAMSIZLIK;
 	private int NOTE;
 
@@ -20,7 +20,7 @@ public class DersOgrenci
 	public DersOgrenci(long dERS_ID, long oGR_ID, int dEVAMSIZLIK, int nOTE)
 	{
 		DERS_ID = dERS_ID;
-		OGR_ID = oGR_ID;
+		OGRENCI_ID = oGR_ID;
 		DEVAMSIZLIK = dEVAMSIZLIK;
 		NOTE = nOTE;
 	}
@@ -29,7 +29,7 @@ public class DersOgrenci
 	{
 		ID = iD;
 		DERS_ID = dERS_ID;
-		OGR_ID = oGR_ID;
+		OGRENCI_ID = oGR_ID;
 		DEVAMSIZLIK = dEVAMSIZLIK;
 		NOTE = nOTE;
 	}
@@ -51,12 +51,12 @@ public class DersOgrenci
 
 	public long getOGR_ID()
 	{
-		return OGR_ID;
+		return OGRENCI_ID;
 	}
 
-	public void setOGR_ID(long oGR_ID)
+	public void setOGRENCI_ID(long oGR_ID)
 	{
-		OGR_ID = oGR_ID;
+		OGRENCI_ID = oGR_ID;
 	}
 
 	public int getDEVAMSIZLIK()
@@ -82,6 +82,6 @@ public class DersOgrenci
 	@Override
 	public String toString()
 	{
-		return "DersOgrenci [ID=" + ID + ", DERS_ID=" + DERS_ID + ", OGR_ID=" + OGR_ID + ", DEVAMSIZLIK=" + DEVAMSIZLIK + ", NOTE=" + NOTE + "]";
+		return "DersOgrenci [ID=" + ID + ", DERS_ID=" + DERS_ID + ", OGR_ID=" + OGRENCI_ID + ", DEVAMSIZLIK=" + DEVAMSIZLIK + ", NOTE=" + NOTE + "]";
 	}
 }

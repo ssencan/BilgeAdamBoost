@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bilgeadam.springbootrest.model.Ogretmen;
 
-@Profile("test")
+//@Profile("test")
 @Repository
 public class OgretmenRepository
 {
@@ -91,13 +90,13 @@ public class OgretmenRepository
 		return namedParameterJdbcTemplate.update(sql, paramMap) == 1;
 	}
 
-	public List<Ogretmen> getAllLike(String name)
-	{
-		String sql = "select * from \"public\".\"OGRETMEN\" where \"NAME\" LIKE :NAME";
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("NAME", "%" + name + "%"); // % işareti parameter içersinde olacak
-		return namedParameterJdbcTemplate.query(sql, paramMap, BeanPropertyRowMapper.newInstance(Ogretmen.class));
-	}
+//	public List<Ogretmen> getAllLike(String name)
+//	{
+//		String sql = "select * from \"public\".\"OGRETMEN\" where \"NAME\" LIKE :NAME";
+//		Map<String, Object> paramMap = new HashMap<>();
+//		paramMap.put("NAME", "%" + name + "%"); // % işareti parameter içersinde olacak
+//		return namedParameterJdbcTemplate.query(sql, paramMap, BeanPropertyRowMapper.newInstance(Ogretmen.class));
+//	}
 
 //	public boolean update(long id, Ogretmen ogr) throws SQLException
 //	{

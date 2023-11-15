@@ -149,8 +149,8 @@ public class DersRepository {
 		sql = "insert into \"public\".\"DERS\" (\"OGRETMEN_ID\", \"KONU_ID\") values (:OGRETMENID, :KONUID)";
 		paramMap = new HashMap<>();
 		// idleri burada set ettiğimiz için postmande girdiğimizin önemi yok
-		paramMap.put("OGRETMENID", 2);
-		paramMap.put("KONUID", 1);
+		paramMap.put("OGRETMENID", 212);
+		paramMap.put("KONUID", 174);
 		return namedParameterJdbcTemplate.update(sql, paramMap) == 1;
 	}
 

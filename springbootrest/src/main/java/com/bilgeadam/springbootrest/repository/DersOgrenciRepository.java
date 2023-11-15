@@ -34,11 +34,14 @@ public class DersOgrenciRepository {
 	}
 
 	public List<DersOgrenci> getAll() {
+		//localhost:8080/dersogrenci/getall
 		String sql = "select * from \"public\".\"DERS_OGRENCI\" order by \"ID\" asc";
 		return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(DersOgrenci.class));
 	}
 
 	public List<DersOgrenciDTO> getAllDTO() {
+		//localhost:8080/dersogrenci/getall
+
 		String sql = "select \"DERS_OGRENCI\".\"ID\",\"DERS_OGRENCI\".\"DEVAMSIZLIK\",\"DERS_OGRENCI\".\"NOTE\",\"DERS_OGRENCI\".\"OGRENCI_ID\",\"DERS_OGRENCI\".\"DERS_ID\",\"DERS\".\"KONU_ID\",\"DERS\".\"OGRETMEN_ID\",\"OGRENCI\".\"ID\", \"OGRENCI\".\"NAME\",\"OGRENCI\".\"OGR_NUMBER\",\"OGRENCI\".\"YEAR\" from \"DERS_OGRENCI\" inner join \"OGRENCI\" ON \"OGRENCI\".\"ID\" = \"DERS_OGRENCI\".\"OGRENCI_ID\" inner join \"DERS\" ON \"DERS\".\"ID\" = \"DERS_OGRENCI\".\"DERS_ID\"";
 		RowMapper<DersOgrenciDTO> rowMapper = new RowMapper<DersOgrenciDTO>() {
 			

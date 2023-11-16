@@ -125,14 +125,14 @@ public class DersRepository {
 		return namedParameterJdbcTemplate.update(sql, paramMap) == 1;
 	}
 
-//	public boolean save(Ders ders) {
-//
-//		String sql = "INSERT INTO \"public\".\"DERS\"(\"OGRETMEN_ID\", \"KONU_ID\") VALUES (:OGRTID, :KID)";
-//		Map<String, Object> paramMap = new HashMap<>();
-//		paramMap.put("OGRTID", ders.getOGRETMEN_ID());
-//		paramMap.put("KID", ders.getKONU_ID());
-//		return namedParameterJdbcTemplate.update(sql, paramMap) == 1;
-//	}
+	public boolean save(Ders ders) {
+
+		String sql = "INSERT INTO \"public\".\"DERS\"(\"OGRETMEN_ID\", \"KONU_ID\") VALUES (:OGRTID, :KID)";
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("OGRTID", ders.getOGRETMEN_ID());
+		paramMap.put("KID", ders.getKONU_ID());
+		return namedParameterJdbcTemplate.update(sql, paramMap) == 1;
+	}
 
 	@Transactional
 	// içeride try catch olmayacak, bu sayede rollback yapıyor

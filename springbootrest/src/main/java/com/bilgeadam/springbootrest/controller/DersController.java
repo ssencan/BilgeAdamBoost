@@ -18,37 +18,37 @@ import com.bilgeadam.springbootrest.model.Ders;
 import com.bilgeadam.springbootrest.model.DersDTO;
 import com.bilgeadam.springbootrest.model.Konu;
 import com.bilgeadam.springbootrest.model.Ogretmen;
-import com.bilgeadam.springbootrest.repository.DersRepository;
+import com.bilgeadam.springbootrest.service.DersService;
 
 @RequestMapping(path = "ders")
 @RestController
 public class DersController {
 
-	private DersRepository ders_repo;
+	private DersService dersService;
 
-	public DersController(DersRepository ders_repo) {
-		this.ders_repo = ders_repo;
+	public DersController(DersService dersService) {
+		this.dersService = dersService;
 	}
 
-	@GetMapping(path = "/getall", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Ders>> getall() {
+	@GetMapping(path = "/getall2", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Ders>> getall2() {
 
 		// localhost:8080/ders/getall
 		try {
-			return ResponseEntity.ok(ders_repo.getAll());
+			return ResponseEntity.ok(dersService.getAllDers());
 
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().build();
 
 		}
 	}
-	
-	@GetMapping(path = "/getalldto", produces = MediaType.APPLICATION_JSON_VALUE)
+
+	@GetMapping(path = "/getalldto2", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<DersDTO>> getalldto() {
 
-		// localhost:8080/ders/getalldto
+		// localhost:8080/ders/getalldto2
 		try {
-			return ResponseEntity.ok(ders_repo.getAllDTO());
+			return ResponseEntity.ok(dersService.getAllDersDto());
 
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().build();
@@ -61,7 +61,7 @@ public class DersController {
 
 		// localhost:8080/ders/getbyid/1
 		try {
-			return ResponseEntity.ok(ders_repo.getByID(id));
+			return ResponseEntity.ok(dersService.getByIDDers(id));
 		} catch (EmptyResultDataAccessException e) {
 			System.out.println("Kayıt bulunamadı");
 			e.printStackTrace();
@@ -71,28 +71,28 @@ public class DersController {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
-	
-	@GetMapping(path = "/getbyiddto/{id}")
-	public ResponseEntity<DersDTO> getbyidDto(@PathVariable(value = "id") long id) {
 
-		// localhost:8080/ders/getbyiddto/1
-		try {
-			return ResponseEntity.ok(ders_repo.getByIDDTO(id));
-		} catch (EmptyResultDataAccessException e) {
-			System.out.println("Kayıt bulunamadı");
-			e.printStackTrace();
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.internalServerError().build();
-		}
-	}
+//	@GetMapping(path = "/getbyiddto/{id}")
+//	public ResponseEntity<DersDTO> getbyidDto(@PathVariable(value = "id") long id) {
+//
+//		// localhost:8080/ders/getbyiddto/1
+//		try {
+//			return ResponseEntity.ok(dersService.getByIDDTO(id));
+//		} catch (EmptyResultDataAccessException e) {
+//			System.out.println("Kayıt bulunamadı");
+//			e.printStackTrace();
+//			return ResponseEntity.notFound().build();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseEntity.internalServerError().build();
+//		}
+//	}
 
 	@DeleteMapping(path = "/deletebyid/{id}")
 	public ResponseEntity<String> deletebyid(@PathVariable(value = "id") long id) {
 		// localhost:8080/ders/deletebyid/1
 		try {
-			boolean result = ders_repo.deleteByID(id);
+			boolean result = dersService.deleteByIDDers(id);
 			if (result) {
 				return ResponseEntity.ok(id + "id 'li kayıt başarı ile silindi");
 			} else {
@@ -118,30 +118,28 @@ public class DersController {
 //			return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
 //		}
 //	}
-	
-	//TransactionalSave
-	@PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> save(@RequestBody Ders ders)
-	{
-		// localhost:8080/ders/save
-		try
-		{
-			Ogretmen ogr = new Ogretmen("yeni öğretmen",false);
-			Konu konu = new Konu("yeni konu");
-			boolean result = ders_repo.save(ogr,konu);
-			if (result)
-			{
-				return ResponseEntity.ok("Kayıt başarı ile kaydedildi");
-			}
-			else
-			{
-				return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
-		}
+
+//	// TransactionalSave
+//	@PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<String> save(@RequestBody Ders ders) {
+//		// localhost:8080/ders/save
+//		try {
+//			Ogretmen ogr = new Ogretmen("yeni öğretmen", false);
+//			Konu konu = new Konu("yeni konu");
+//			boolean result = dersService.saveDers(ogr, konu);
+//			if (result) {
+//				return ResponseEntity.ok("Kayıt başarı ile kaydedildi");
+//			} else {
+//				return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
+//		}
+//	}
+
+	@GetMapping("/print")
+	public String print() {
+		return dersService.print();
 	}
 }

@@ -17,19 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bilgeadam.springbootrest.model.Ogrenci;
 import com.bilgeadam.springbootrest.repository.OgrenciRepository;
+import com.bilgeadam.springbootrest.service.OgrenciService;
 
 @RestController
 @RequestMapping(path = "/ogrenci")
 public class OgrenciController {
 
 	@Autowired
-	private OgrenciRepository ogrencirepo;
+	private OgrenciService ogrenci_service;
 
 	@GetMapping(path = "/getall", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Ogrenci>> getall() {
 		// localhost:8080/ogrenci/getall
 		try {
-			return ResponseEntity.ok(ogrencirepo.getAll());
+			return ResponseEntity.ok(ogrenci_service.getAllOgrenci());
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().build();
 		}
@@ -39,7 +40,7 @@ public class OgrenciController {
 	public ResponseEntity<Ogrenci> getbyid(@PathVariable(value = "id") long id) {
 		// localhost:8080/ogrenci/getbyid/1
 		try {
-			return ResponseEntity.ok(ogrencirepo.getByID(id));
+			return ResponseEntity.ok(ogrenci_service.getByIDOgrenci(id));
 		} catch (EmptyResultDataAccessException e) {
 			System.out.println("Kayıt bulunamadı");
 			e.printStackTrace();
@@ -54,7 +55,7 @@ public class OgrenciController {
 	public ResponseEntity<String> deletebyid(@PathVariable(value = "id") long id) {
 		// localhost:8080/ogrenci/deletebyid/1
 		try {
-			boolean result = ogrencirepo.deleteByID(id);
+			boolean result = ogrenci_service.deleteByIDOgrenci(id);
 			if (result) {
 				return ResponseEntity.ok(id + "id 'li kayıt başarı ile silindi");
 			} else {
@@ -69,7 +70,7 @@ public class OgrenciController {
 	public ResponseEntity<String> save(@RequestBody Ogrenci ogr) {
 		// localhost:8080/ogrenci/save
 		try {
-			boolean result = ogrencirepo.save(ogr);
+			boolean result = ogrenci_service.saveOgrenci(ogr);
 			if (result) {
 				return ResponseEntity.ok("Kayıt başarılı");
 			} else {
@@ -80,5 +81,10 @@ public class OgrenciController {
 			return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
 		}
 	}
+	
+	 @GetMapping("/print2")
+	    public String print() {
+	        return ogrenci_service.print2();
+	    }
 
 }

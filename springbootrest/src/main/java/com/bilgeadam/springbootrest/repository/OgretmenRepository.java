@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bilgeadam.springbootrest.model.Ogretmen;
 
-//@Profile("test")
+@Profile("test")
 @Repository
 public class OgretmenRepository
 {

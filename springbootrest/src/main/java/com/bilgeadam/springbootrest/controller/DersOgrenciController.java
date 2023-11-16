@@ -17,15 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bilgeadam.springbootrest.model.DersOgrenci;
 import com.bilgeadam.springbootrest.model.DersOgrenciDTO;
 import com.bilgeadam.springbootrest.repository.DersOgrenciRepository;
+import com.bilgeadam.springbootrest.service.DersOgrenciService;
 
 @RequestMapping(path = "dersogrenci")
 @RestController
 public class DersOgrenciController {
 
-	private DersOgrenciRepository dersogrenci_repo;
+	private DersOgrenciService dersOgrenciService;
 
-	public DersOgrenciController(DersOgrenciRepository dersogrenci_repo) {
-		this.dersogrenci_repo = dersogrenci_repo;
+	public DersOgrenciController(DersOgrenciService dersOgrenciService) {
+
+		this.dersOgrenciService = dersOgrenciService;
 	}
 
 	@GetMapping(path = "/getall", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,20 +35,20 @@ public class DersOgrenciController {
 
 		// localhost:8080/dersogrenci/getall
 		try {
-			return ResponseEntity.ok(dersogrenci_repo.getAll());
+			return ResponseEntity.ok(dersOgrenciService.getAllDersOgrenci());
 
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().build();
 
 		}
 	}
-	
+
 	@GetMapping(path = "/getalldto", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<DersOgrenciDTO>> getalldto() {
 
 		// localhost:8080/dersogrenci/getalldto
 		try {
-			return ResponseEntity.ok(dersogrenci_repo.getAllDTO());
+			return ResponseEntity.ok(dersOgrenciService.getAllDersOgrenciDto());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,7 +63,7 @@ public class DersOgrenciController {
 
 		// localhost:8080/dersogrenci/getbyid/1
 		try {
-			return ResponseEntity.ok(dersogrenci_repo.getByID(id));
+			return ResponseEntity.ok(dersOgrenciService.getByIDDersOgrenci(id));
 		} catch (EmptyResultDataAccessException e) {
 			System.out.println("Kayıt bulunamadı");
 			e.printStackTrace();
@@ -71,13 +73,13 @@ public class DersOgrenciController {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
-	
+
 	@GetMapping(path = "/getbyiddto/{id}")
 	public ResponseEntity<DersOgrenciDTO> getbyiddto(@PathVariable(value = "id") long id) {
 
 		// localhost:8080/dersogrenci/getbyiddto/1
 		try {
-			return ResponseEntity.ok(dersogrenci_repo.getByIDDTO(id));
+			return ResponseEntity.ok(dersOgrenciService.getByIDDersOgrenciDto(id));
 		} catch (EmptyResultDataAccessException e) {
 			System.out.println("Kayıt bulunamadı");
 			e.printStackTrace();
@@ -92,7 +94,7 @@ public class DersOgrenciController {
 	public ResponseEntity<String> deletebyid(@PathVariable(value = "id") long id) {
 		// localhost:8080/dersogrenci/deletebyid/1
 		try {
-			boolean result = dersogrenci_repo.deleteByID(id);
+			boolean result = dersOgrenciService.deleteByIDDersOgrenci(id);
 			if (result) {
 				return ResponseEntity.ok(id + "id 'li kayıt başarı ile silindi");
 			} else {
@@ -102,12 +104,12 @@ public class DersOgrenciController {
 			return ResponseEntity.internalServerError().body(id + "id 'li kayıt silinemedi");
 		}
 	}
-	
+
 	@PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> save(@RequestBody DersOgrenci dersogr) {
 		// localhost:8080/dersogrenci/save
 		try {
-			boolean result = dersogrenci_repo.save(dersogr);
+			boolean result = dersOgrenciService.saveDersOgrenci(dersogr);
 			if (result) {
 				return ResponseEntity.ok("Kayıt başarılı");
 			} else {

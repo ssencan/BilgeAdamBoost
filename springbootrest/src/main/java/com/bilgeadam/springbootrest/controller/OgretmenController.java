@@ -20,13 +20,30 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bilgeadam.springbootrest.model.Ogretmen;
 import com.bilgeadam.springbootrest.service.OgretmenService;
 
-@RestController
 @RequestMapping(path = "ogretmen")
+@RestController
 public class OgretmenController {
-	
+
 	@Autowired
 	private OgretmenService ogretmenService;
 
+	
+	 @GetMapping("/print")
+	    public String print() {
+	        return ogretmenService.print();
+	    }
+	
+	@GetMapping(path = "getall", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Ogretmen>> getall() {
+		// localhost:8080/ogretmen/getall
+		try {
+			return ResponseEntity.ok(ogretmenService.getAllOgretmen());
+		} catch (Exception e) {
+			// daha sonra değişecek exception handling olacak
+			System.err.println("hatalı gardas"+e.getMessage());
+			return ResponseEntity.internalServerError().build();
+		}
+	}
 
 	@PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> save(@RequestBody Ogretmen ogr) {
@@ -99,15 +116,4 @@ public class OgretmenController {
 		}
 	}
 
-	@GetMapping(path = "getall", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Ogretmen>> getall() {
-		// localhost:8080/ogretmen/getall
-		try {
-			return ResponseEntity.ok(ogretmenService.getAllOgretmen());
-		} catch (Exception e) {
-			// daha sonra değişecek exception handling olacak
-			System.err.println(e.getMessage());
-			return ResponseEntity.internalServerError().build();
-		}
-	}
 }

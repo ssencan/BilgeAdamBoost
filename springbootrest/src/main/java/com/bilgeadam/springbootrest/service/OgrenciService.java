@@ -5,41 +5,40 @@ import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.bilgeadam.springbootrest.model.Ogretmen;
-import com.bilgeadam.springbootrest.repository.OgretmenRepository;
+import com.bilgeadam.springbootrest.model.Ogrenci;
+import com.bilgeadam.springbootrest.repository.OgrenciRepository;
 
 @Service
-public class OgretmenService {
+public class OgrenciService {
 
-	private OgretmenRepository ogretmenRepository;
+	private OgrenciRepository ogrenciRepository;
 
-	public OgretmenService(OgretmenRepository ogretmenRepository) {
-		this.ogretmenRepository = ogretmenRepository;
+	public OgrenciService(OgrenciRepository ogrenciRepository) {
+		this.ogrenciRepository = ogrenciRepository;
 	}
 
-	public List<Ogretmen> getAllOgretmen() {
+	public List<Ogrenci> getAllOgrenci() {
 		try {
-			return ogretmenRepository.getAll();
+			return ogrenciRepository.getAll();
 		} catch (Exception e) {
 			e.getMessage();
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
 
-	public boolean deleteByIDOgretmen(long id) {
+	public boolean deleteByIDOgrenci(long id) {
 		try {
-			return ogretmenRepository.deleteByID(id);
+			return ogrenciRepository.deleteByID(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
 
-	public Ogretmen getByIDOgretmen(long id) {
+	public Ogrenci getByIDOgrenci(long id) {
 		try {
-			return ogretmenRepository.getByID(id);
+			return ogrenciRepository.getByID(id);
 		} catch (EmptyResultDataAccessException e) {
 			return null; // or handle as needed, e.g., throw a custom exception
 		} catch (Exception e) {
@@ -48,18 +47,18 @@ public class OgretmenService {
 		}
 	}
 
-	public boolean saveOgretmen(Ogretmen ogr) {
+	public boolean saveOgrenci(Ogrenci ogr) {
 		try {
-			return ogretmenRepository.save(ogr);
+			return ogrenciRepository.save(ogr);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
-	
-	 public String print() {
-	        return "Merhaba Dünya!";
-	    }
+
+	public String print2() {
+		return "Merhaba Dünya!";
+	}
 //	public List<Ogretmen> getAllLike(String name) {
 //		String sql = "select * from \"public\".\"OGRETMEN\" where \"NAME\" LIKE :NAME";
 //		Map<String, Object> paramMap = new HashMap<>();

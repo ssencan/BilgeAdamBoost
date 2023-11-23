@@ -29,11 +29,11 @@ public class OgrenciController {
 	@GetMapping(path = "/getall", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Ogrenci>> getall() {
 		// localhost:8080/ogrenci/getall
-		try {
+//		try {
 			return ResponseEntity.ok(ogrenci_service.getAllOgrenci());
-		} catch (Exception e) {
-			return ResponseEntity.internalServerError().build();
-		}
+//		} catch (Exception e) {
+//			return ResponseEntity.internalServerError().build();
+//		}
 	}
 
 	@GetMapping(path = "/getbyid/{id}")

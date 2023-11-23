@@ -38,14 +38,14 @@ public class OgretmenService {
 	}
 
 	public Ogretmen getByIDOgretmen(long id) {
-		try {
+//		try {
 			return ogretmenRepository.getByID(id);
-		} catch (EmptyResultDataAccessException e) {
-			return null; // or handle as needed, e.g., throw a custom exception
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+//		} catch (EmptyResultDataAccessException e) {
+//			return null; // or handle as needed, e.g., throw a custom exception
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 	public boolean saveOgretmen(Ogretmen ogr) {

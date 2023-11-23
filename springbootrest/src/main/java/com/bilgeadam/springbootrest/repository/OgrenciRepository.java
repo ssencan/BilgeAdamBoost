@@ -21,6 +21,7 @@ public class OgrenciRepository {
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	public List<Ogrenci> getAll() {
+		//int k = 7/0;
 		String sql = "select * from \"public\".\"OGRENCI\" order by \"ID\" asc";
 		return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Ogrenci.class));
 	}

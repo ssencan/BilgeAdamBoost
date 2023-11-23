@@ -47,6 +47,7 @@ public class KonuRepository {
 	}
 
 	public List<Konu> getAll() {
+		//int k = 7/0;
 		String sql = "select * from \"public\".\"KONU\" order by \"ID\" asc";
 		return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Konu.class));
 

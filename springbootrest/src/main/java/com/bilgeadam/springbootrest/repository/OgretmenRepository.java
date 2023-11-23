@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bilgeadam.springbootrest.model.Ogretmen;
 
-@Profile("test")
+//@Profile("test")
 @Repository
 public class OgretmenRepository
 {

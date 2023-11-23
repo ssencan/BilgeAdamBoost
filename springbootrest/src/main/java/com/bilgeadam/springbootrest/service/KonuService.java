@@ -3,6 +3,8 @@ package com.bilgeadam.springbootrest.service;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.bilgeadam.springbootrest.model.Konu;
@@ -18,42 +20,45 @@ public class KonuService {
 	}
 
 	public List<Konu> getAllKonu() {
-		try {
+//		try {
 			return konuRepository.getAll();
-		} catch (Exception e) {
-			e.getMessage();
-			e.printStackTrace();
-			return null;
-		}
+//		} catch (Exception e) {
+//			e.getMessage();
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 	public boolean deleteByIDKonu(long id) {
-		try {
+//		try {
 			return konuRepository.deleteByID(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
 	}
 
+
 	public Konu getByIDKonu(long id) {
-		try {
+//		try {
 			return konuRepository.getByID(id);
-		} catch (EmptyResultDataAccessException e) {
-			return null; // or handle as needed, e.g., throw a custom exception
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+//		} catch (EmptyResultDataAccessException e) {
+//			System.out.println("Kayıt bulunamadı");
+//			e.getMessage();
+//			return null;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 	public boolean saveKonu(Konu konu) {
-		try {
+//		try {
 			return konuRepository.save(konu);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
 	}
 
 	public String print() {

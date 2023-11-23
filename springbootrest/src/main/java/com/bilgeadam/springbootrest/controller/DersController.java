@@ -30,7 +30,7 @@ public class DersController {
 		this.dersService = dersService;
 	}
 
-	@GetMapping(path = "/getall2", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/getall", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Ders>> getall2() {
 
 		// localhost:8080/ders/getall
@@ -43,10 +43,10 @@ public class DersController {
 		}
 	}
 
-	@GetMapping(path = "/getalldto2", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/getalldto", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<DersDTO>> getalldto() {
 
-		// localhost:8080/ders/getalldto2
+		// localhost:8080/ders/getalldto
 		try {
 			return ResponseEntity.ok(dersService.getAllDersDto());
 

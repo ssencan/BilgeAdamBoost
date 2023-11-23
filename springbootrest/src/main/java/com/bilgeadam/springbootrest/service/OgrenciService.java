@@ -18,13 +18,13 @@ public class OgrenciService {
 	}
 
 	public List<Ogrenci> getAllOgrenci() {
-		try {
+//		try {
 			return ogrenciRepository.getAll();
-		} catch (Exception e) {
-			e.getMessage();
-			e.printStackTrace();
-			return null;
-		}
+//		} catch (Exception e) {
+//			e.getMessage();
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 	public boolean deleteByIDOgrenci(long id) {

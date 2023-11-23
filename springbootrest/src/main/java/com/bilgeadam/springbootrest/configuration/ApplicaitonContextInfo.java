@@ -14,7 +14,8 @@ public class ApplicaitonContextInfo
 	
 //	@Value("${myProperties.complexitylevel}")
 //	public String complexity;  
-
+//	exclude = MultipartAutoConfiguration.class
+	
 	public ApplicaitonContextInfo(ApplicationContext applicationContext)
 	{
 		this.applicationContext = applicationContext;

@@ -18,23 +18,23 @@ public class OgretmenService {
 	}
 
 	public List<Ogretmen> getAllOgretmen() {
-		try {
+//		try {
 			return ogretmenRepository.getAll();
-		} catch (Exception e) {
-			e.getMessage();
-			e.printStackTrace();
-			return null;
-		}
+//		} catch (Exception e) {
+//			e.getMessage();
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 	
 
 	public boolean deleteByIDOgretmen(long id) {
-		try {
+//		try {
 			return ogretmenRepository.deleteByID(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
 	}
 
 	public Ogretmen getByIDOgretmen(long id) {
@@ -49,12 +49,12 @@ public class OgretmenService {
 	}
 
 	public boolean saveOgretmen(Ogretmen ogr) {
-		try {
+//		try {
 			return ogretmenRepository.save(ogr);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
 	}
 	
 	 public String print() {

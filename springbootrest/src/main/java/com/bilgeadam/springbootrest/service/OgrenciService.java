@@ -28,32 +28,32 @@ public class OgrenciService {
 	}
 
 	public boolean deleteByIDOgrenci(long id) {
-		try {
+//		try {
 			return ogrenciRepository.deleteByID(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
 	}
 
 	public Ogrenci getByIDOgrenci(long id) {
-		try {
+//		try {
 			return ogrenciRepository.getByID(id);
-		} catch (EmptyResultDataAccessException e) {
-			return null; // or handle as needed, e.g., throw a custom exception
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+//		} catch (EmptyResultDataAccessException e) {
+//			return null; // or handle as needed, e.g., throw a custom exception
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 	public boolean saveOgrenci(Ogrenci ogr) {
-		try {
+//		try {
 			return ogrenciRepository.save(ogr);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
 	}
 
 	public String print2() {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -19,6 +20,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.bilgeadam.springbootrest.exception.MusteriActiveOlmamisException;
 import com.bilgeadam.springbootrest.model.SystemUser;
+import com.bilgeadam.springbootrest.model.TokenInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.FilterChain;
@@ -69,9 +71,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 //		System.err.println(token);
 		// token = 30948hgb57gbhg9wpuısgh==
 		// react js tarafı için gerekecek
-		String body = "(" + principal.getUsername() + ") " + token;
-		System.err.println(body);
-		res.getWriter().write(body);
+		TokenInfo body = new TokenInfo(principal.getUsername(), token);
+		System.err.println(body.toString());
+		// json olarak belirtmezsem default olarak stream kabul ediliyor
+		res.setContentType(MediaType.APPLICATION_JSON_VALUE);
+		res.getWriter().write(body.toString());
 		res.getWriter().flush();
 	}
 

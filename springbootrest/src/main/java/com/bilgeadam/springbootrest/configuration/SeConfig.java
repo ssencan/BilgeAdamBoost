@@ -47,13 +47,21 @@ public class SeConfig // extends WebSecurityCongigurerAdapter bu da deprecated
 		// ** baştan yazarsan o path içindeki herşeyi ezersin
 //		http.authorizeHttpRequests().requestMatchers("/ogretmen/**").hasRole("NORMAL");
 //		http.authorizeHttpRequests().anyRequest().permitAll();
+		
+		http.authorizeHttpRequests(customizer -> customizer.requestMatchers(HttpMethod.GET).hasRole("USER"));
+//		http.authorizeHttpRequests(customizer -> customizer.requestMatchers(HttpMethod.POST).hasRole("USER"));
+//		http.authorizeHttpRequests(customizer -> customizer.requestMatchers("/konu/getall").authenticated());
+//		http.authorizeHttpRequests(customizer -> customizer.anyRequest().permitAll());
+		http.authorizeHttpRequests(customizer -> customizer.anyRequest().authenticated());
+		//bu şekilde sadece bir endpointe de permit verebiliyon.
+//		http.authorizeHttpRequests(customizer -> customizer.requestMatchers("/konu/getall").permitAll());
 		// -----------------------------------------
 		// mvc için geçerli
 //		http.authorizeRequests().antMatchers("/error").permitAll();
 //		// hepsini birden istisnasız kapatmak için tek satır
 //		http.authorizeRequests().anyRequest().authenticated();
 		// -----------------------------------------
-//		http.authorizeHttpRequests(customizer -> customizer.requestMatchers(HttpMethod.GET).authenticated().anyRequest().permitAll());
+//		http.authorizeHttpRequests(customizer -> customizer.requestMatchers(HttpMethod.GET).authenticated());
 //		http.authorizeHttpRequests(customizer -> customizer.requestMatchers("/ogretmen/getall").hasRole("USER"));
 		//bir endpoint controller pathine hasrole verip aynı metod için diğer controller pathlerinde authorize yoksa ve login yapmasın istiyosan altta extra permit all yazıcan.
 		// genel endpoint hasrole yapınca zaten authonticationa yazmasan da token kontrolü için authentication gerekiyor.

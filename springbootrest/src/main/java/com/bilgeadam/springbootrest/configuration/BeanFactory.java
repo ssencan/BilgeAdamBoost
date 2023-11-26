@@ -5,10 +5,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+
 @Component
 //@Lazy
 public class BeanFactory
 {
+	@Bean
+	public OpenAPI springShopOpenAPI()
+	{
+		return new OpenAPI().info(new Info().title("OBS - Öğrenci Bilgi Sistemi").description("OBS application").version("V1.0").license(new License().name("Apache 2.0").url("localhost:8080/license"))).externalDocs(new ExternalDocumentation().description("OBS rest dökümantasyonu").url("localhost:8080/external"));
+	}
+	
 	@Bean
 	public PasswordEncoder passwordEncoder()
 	{
@@ -22,13 +33,13 @@ public class BeanFactory
 //	}
 }
 
-class Person
-{
-	private String name;
-
-	public Person(String name)
-	{
-		super();
-		this.name = name;
-	}
-}
+//class Person
+//{
+//	private String name;
+//
+//	public Person(String name)
+//	{
+//		super();
+//		this.name = name;
+//	}
+//}

@@ -41,42 +41,42 @@ public class OgretmenController {
 	@GetMapping(path = "getall", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Ogretmen>> getall() {
 		// localhost:8080/ogretmen/getall
-		try {
+//		try {
 			return ResponseEntity.ok(ogretmenService.getAllOgretmen());
-		} catch (Exception e) {
+//		} catch (Exception e) {
 			// daha sonra değişecek exception handling olacak
-			System.err.println(e.getMessage());
-			return ResponseEntity.internalServerError().build();
-		}
+//			System.err.println(e.getMessage());
+//			return ResponseEntity.internalServerError().build();
+//		}
 	}
 
 	@PostMapping(path = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> save(@RequestBody Ogretmen ogr) {
 		// localhost:8080/ogretmen/save
-		try {
+//		try {
 			boolean result = ogretmenService.saveOgretmen(ogr);
 			if (result) {
 				return ResponseEntity.ok("Kayıt başarı ile kaydedildi");
 			} else {
 				return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseEntity.internalServerError().body("Kayıt başarı ile kaydedilemedi");
+//		}
 	}
 
 	@GetMapping(path = "getbyidheader", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Ogretmen> getbyidheader(@RequestHeader(name = "id") long id) {
 		// localhost:8080/ogretmen/getbyidheader
-		try {
+//		try {
 			return ResponseEntity.ok(ogretmenService.getByIDOgretmen(id));
-		} catch (EmptyResultDataAccessException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.internalServerError().build();
-		}
+//		} catch (EmptyResultDataAccessException e) {
+//			return ResponseEntity.notFound().build();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseEntity.internalServerError().build();
+//		}
 	}
 
 	@GetMapping(path = "getbyidqueryparam", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -108,17 +108,17 @@ public class OgretmenController {
 	@DeleteMapping(path = "deletebyid/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> deletebyid(@PathVariable(name = "id") long id) {
 		// localhost:8080/ogretmen/deletebyid/1
-		try {
+//		try {
 			boolean result = ogretmenService.deleteByIDOgretmen(id);
 			if (result) {
 				return ResponseEntity.ok(id + "id 'li kayıt başarı ile silindi");
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(id + "id 'li kayıt bulunamadı");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.internalServerError().body(id + "id 'li kayıt silinemedi");
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseEntity.internalServerError().body(id + "id 'li kayıt silinemedi");
+//		}
 	}
 
 }

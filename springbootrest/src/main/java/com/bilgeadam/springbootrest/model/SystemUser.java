@@ -9,6 +9,11 @@ public class SystemUser // extends User // yapılabilir
 	public SystemUser()
 	{
 	}
+	
+	public SystemUser(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 
 	public SystemUser(String username, String password, boolean enabled)
 	{

@@ -48,11 +48,12 @@ public class SeConfig // extends WebSecurityCongigurerAdapter bu da deprecated
 //		http.authorizeHttpRequests().requestMatchers("/ogretmen/**").hasRole("NORMAL");
 //		http.authorizeHttpRequests().anyRequest().permitAll();
 		
-		http.authorizeHttpRequests(customizer -> customizer.requestMatchers(HttpMethod.GET).hasRole("USER"));
+		//DİKKAT ET /beans de /actuator da get isteği
+//		http.authorizeHttpRequests(customizer -> customizer.requestMatchers(HttpMethod.POST).hasRole("USER"));
 //		http.authorizeHttpRequests(customizer -> customizer.requestMatchers(HttpMethod.POST).hasRole("USER"));
 //		http.authorizeHttpRequests(customizer -> customizer.requestMatchers("/konu/getall").authenticated());
-//		http.authorizeHttpRequests(customizer -> customizer.anyRequest().permitAll());
-		http.authorizeHttpRequests(customizer -> customizer.anyRequest().authenticated());
+		http.authorizeHttpRequests(customizer -> customizer.anyRequest().permitAll());
+//		http.authorizeHttpRequests(customizer -> customizer.anyRequest().authenticated());
 		//bu şekilde sadece bir endpointe de permit verebiliyon.
 //		http.authorizeHttpRequests(customizer -> customizer.requestMatchers("/konu/getall").permitAll());
 		// -----------------------------------------
